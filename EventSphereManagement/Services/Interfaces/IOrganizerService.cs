@@ -4,10 +4,10 @@ namespace EventSphereManagement.Services.Interfaces
 {
     public interface IOrganizerService
     {
-        Task<OrganizerDTO> GetOrganizerByIdAsync(int organizerId);
-        Task<IEnumerable<OrganizerDTO>> GetAllOrganizersAsync();
-        Task CreateOrganizerAsync(OrganizerDTO organizerDto);
-        Task UpdateOrganizerAsync(OrganizerDTO organizerDto, int organizerId);
-        Task DeleteOrganizerAsync(int organizerId);
+        Task<OrganizerDTO> GetOrganizerById(int organizerId);
+        Task<IEnumerable<OrganizerDTO>> GetAllOrganizers();
+        Task CreateOrganizer(OrganizerDTO organizerDto);
+        Task UpdateOrganizer(OrganizerDTO organizerDto, int organizerId);
+        Task DeleteOrganizer(int organizerId);
     }
 }

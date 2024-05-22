@@ -11,5 +11,6 @@ namespace EventSphereManagement.Repositories.Interfaces
         Task UpdateAttendee(Attendee attendee,int attendeeId);
         Task DeleteAttendee(int attendeeId);
         Task<IEnumerable<Attendee>> GetAttendeesForEvent(int eventId);
+        
     }
 }

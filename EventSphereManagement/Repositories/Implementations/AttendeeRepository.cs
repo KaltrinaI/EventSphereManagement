@@ -30,10 +30,7 @@ namespace EventSphereManagement.Repositories.Implementations
             await _context.SaveChangesAsync();
         }
 
-        public Task AddAttendee(Attendee attendee)
-        {
-            throw new NotImplementedException();
-        }
+       
 
         public async Task DeleteAttendee(int attendeeId)
         {

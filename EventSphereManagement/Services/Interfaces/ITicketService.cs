@@ -4,13 +4,13 @@ namespace EventSphereManagement.Services.Interfaces
 {
     public interface ITicketService
     {
-        Task<TicketDTO> GetTicketByIdAsync(int ticketId);
-        Task<IEnumerable<TicketDTO>> GetTicketsForEventAsync(int eventId);
-        Task<IEnumerable<TicketDTO>> CheckTicketAvailabilityAsync(int eventId);
-        Task<decimal> CalculateRevenueForEventAsync(int eventId);
-        Task SellTicketAsync(TicketDTO ticketDto);
-        Task UpdateTicketAsync(TicketDTO ticketDto, int ticketId);
-        Task RefundTicketAsync(int ticketId);
+        Task<TicketDTO> GetTicketById(int ticketId);
+        Task<IEnumerable<TicketDTO>> GetTicketsForEvent(int eventId);
+        Task<IEnumerable<TicketDTO>> CheckTicketAvailability(int eventId);
+        Task<decimal> CalculateRevenueForEvent(int eventId);
+        Task SellTicket(TicketDTO ticketDto);
+        Task UpdateTicket(TicketDTO ticketDto, int ticketId);
+        Task RefundTicket(int ticketId);
     }
 }
 

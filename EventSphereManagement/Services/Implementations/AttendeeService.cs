@@ -41,18 +41,19 @@ namespace EventSphereManagement.Services.Implementations
             return response;
         }
 
-        //public async Task RegisterAttendee(AttendeeDTO attendeeDto)
-        //{
-        //    var attendee = _mapper.Map<Attendee>(attendeeDto);
-        //    await _repository.Add(attendee);
-        //}
+        public async Task AddAttendee(AttendeeDTO attendeeDto)
+        {
+  
+            await _repository.AddAttendee(attendeeDto);
+        }
 
         public async Task UpdateAttendee(AttendeeDTO attendeeDto, int attendeeId)
         {
-            await _repository.UpdateAttendee(attendeeDto, attendeeId);
+            var requestedDTO = _mapper.Map < Attendee > (attendeeDto);
+            await _repository.UpdateAttendee(requestedDTO, attendeeId);
         }
 
-        public async Task RemoveAttendee(int attendeeId)
+        public async Task DeleteAttendee(int attendeeId)
         {
              await _repository.DeleteAttendee(attendeeId);
             
@@ -60,18 +61,13 @@ namespace EventSphereManagement.Services.Implementations
 
         public async Task<IEnumerable<AttendeeDTO>> GetAttendeesByEvent(int eventId)
         {
-            var attendees = await _repository.GetByEventIdAsync(eventId);
+            var attendees = await _repository.GetAttendeesForEvent(eventId);
             var response = attendees?.Select(element =>
             {
                 AttendeeDTO attendeeDto = new AttendeeDTO();
                 return _mapper.Map(element, attendeeDto);
             });
             return response;
-        }
-
-        public async Task CheckInAttendee(int eventId, int attendeeId)
-        {
-            await _repository.CheckInAsync(eventId, attendeeId);
         }
     }
 }

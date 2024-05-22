@@ -6,10 +6,10 @@ namespace EventSphereManagement.Services.Interfaces
     {
         Task<AttendeeDTO> GetAttendeeById(int attendeeId);
         Task<IEnumerable<AttendeeDTO>> GetAllAttendees();
-        Task RegisterAttendee(AttendeeDTO attendeeDto);
+        Task AddAttendee(AttendeeDTO attendeeDto);
         Task UpdateAttendee(AttendeeDTO attendeeDto, int attendeeId);
-        Task RemoveAttendee(int attendeeId);
+        Task DeleteAttendee(int attendeeId);
         Task<IEnumerable<AttendeeDTO>> GetAttendeesByEvent(int eventId);
-        Task CheckInAttendee(int eventId, int attendeeId);
+       
     }
 }

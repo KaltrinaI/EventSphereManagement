@@ -1,4 +1,5 @@
 ﻿using EventSphereManagement.Data;
+using EventSphereManagement.DTOs;
 using EventSphereManagement.Models;
 using EventSphereManagement.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -28,13 +29,23 @@ namespace EventSphereManagement.Repositories.Implementations
             return await _context.Events.Where(e => e.OrganizerId == organizerId).ToListAsync();
         }
 
-        public async Task AddEvent(Event @event)
+        public async Task AddEvent(EventRequestDTO @event)
         {
-            _context.Events.Add(@event);
+            var eventBody = new Event();
+
+            eventBody.Name = @event.Name;
+            eventBody.Description = @event.Description;
+            eventBody.StartDate= @event.StartDate;
+            eventBody.EndDate= @event.EndDate;  
+            eventBody.Location = @event.Location;
+            eventBody.Capacity = @event.Capacity;
+            eventBody.OrganizerId = @event.OrganizerId;
+
+            _context.Events.Add(eventBody);
             await _context.SaveChangesAsync();
         }
 
-        public async Task UpdateEvent(Event @event, int eventId)
+        public async Task UpdateEvent(EventRequestDTO @event, int eventId)
         {
             var existingEvent = await _context.Events.FindAsync(eventId);
             if (existingEvent != null)
@@ -46,6 +57,7 @@ namespace EventSphereManagement.Repositories.Implementations
                 existingEvent.Location = @event.Location;
                 existingEvent.Capacity = @event.Capacity;
                 existingEvent.OrganizerId = @event.OrganizerId;
+
                 _context.Events.Update(existingEvent);
                 await _context.SaveChangesAsync();
             }
