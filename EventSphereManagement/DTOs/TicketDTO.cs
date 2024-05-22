@@ -1,15 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace EventSphereManagement.Models
+﻿namespace EventSphereManagement.DTOs
 {
-    public class Ticket
+    public class TicketDTO
     {
-        [Key]
         public int TicketId { get; set; }
         public int EventId { get; set; }
         public decimal Price { get; set; }
         public string TicketType { get; set; }
         public int QuantityAvailable { get; set; }
-        public Event Event { get; set; }
     }
 }
