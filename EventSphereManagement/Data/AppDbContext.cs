@@ -1,4 +1,5 @@
 ﻿using EventSphereManagement.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace EventSphereManagement.Data
@@ -12,21 +13,18 @@ namespace EventSphereManagement.Data
         public DbSet<Ticket> Tickets { get; set; }
         public DbSet<Attendee> Attendees { get; set; }
         public DbSet<Organizer> Organizers { get; set; }
-        public DbSet<EventAttendees> EventAttendees { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Define relationships and keys here
             modelBuilder.Entity<EventAttendees>().HasKey(ea => new { ea.EventId, ea.AttendeeId });
 
-            modelBuilder.Entity<EventAttendees>()
-                .HasOne<Event>(ea => ea.Event)
-                .WithMany(e => e.EventAttendees)
-                .HasForeignKey(ea => ea.EventId);
+            modelBuilder.Entity<IdentityUserLogin<string>>().HasKey(l => new { l.LoginProvider, l.ProviderKey });
+            modelBuilder.Entity<IdentityUserRole<string>>().HasKey(r => new { r.UserId, r.RoleId });
+            modelBuilder.Entity<IdentityUserToken<string>>().HasKey(t => new { t.UserId, t.LoginProvider, t.Name });
 
-            modelBuilder.Entity<EventAttendees>()
-                .HasOne<Attendee>(ea => ea.Attendee)
-                .WithMany(a => a.EventAttendees)
-                .HasForeignKey(ea => ea.AttendeeId);
+            modelBuilder.Entity<IdentityUserClaim<string>>().HasKey(c => c.Id);
+            modelBuilder.Entity<IdentityRoleClaim<string>>().HasKey(rc => rc.Id);
         }
     }
 

@@ -91,21 +91,6 @@ namespace EventSphereManagement.Migrations
                     b.ToTable("Events");
                 });
 
-            modelBuilder.Entity("EventSphereManagement.Models.EventAttendees", b =>
-                {
-                    b.Property<int>("EventId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("AttendeeId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("EventId", "AttendeeId");
-
-                    b.HasIndex("AttendeeId");
-
-                    b.ToTable("EventAttendees");
-                });
-
             modelBuilder.Entity("EventSphereManagement.Models.Organizer", b =>
                 {
                     b.Property<int>("OrganizerId")
@@ -177,25 +162,6 @@ namespace EventSphereManagement.Migrations
                     b.Navigation("Organizer");
                 });
 
-            modelBuilder.Entity("EventSphereManagement.Models.EventAttendees", b =>
-                {
-                    b.HasOne("EventSphereManagement.Models.Attendee", "Attendee")
-                        .WithMany("EventAttendees")
-                        .HasForeignKey("AttendeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EventSphereManagement.Models.Event", "Event")
-                        .WithMany("EventAttendees")
-                        .HasForeignKey("EventId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Attendee");
-
-                    b.Navigation("Event");
-                });
-
             modelBuilder.Entity("EventSphereManagement.Models.Ticket", b =>
                 {
                     b.HasOne("EventSphereManagement.Models.Event", "Event")
@@ -207,15 +173,8 @@ namespace EventSphereManagement.Migrations
                     b.Navigation("Event");
                 });
 
-            modelBuilder.Entity("EventSphereManagement.Models.Attendee", b =>
-                {
-                    b.Navigation("EventAttendees");
-                });
-
             modelBuilder.Entity("EventSphereManagement.Models.Event", b =>
                 {
-                    b.Navigation("EventAttendees");
-
                     b.Navigation("Tickets");
                 });
 

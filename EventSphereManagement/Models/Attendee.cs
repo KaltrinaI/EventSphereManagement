@@ -15,6 +15,5 @@ namespace EventSphereManagement.Models
 
         // this navigation property
         public Event Event { get; set; }
-        public ICollection<EventAttendees> EventAttendees { get; set; }
     }
 }
